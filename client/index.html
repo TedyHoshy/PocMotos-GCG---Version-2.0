@@ -3,42 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <title>Taller de Motos</title>
+    <!-- Enlace al archivo CSS externo -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>Taller de Motos</h1>
+    <h1>🔧 Taller de Motos</h1>
 
-    <!-- ========== FORMULARIO MECÁNICO ========== -->
-    <h2>Agregar Mecánico</h2>
-    <input type="text" id="mec-name" placeholder="Nombre">
-    <input type="text" id="mec-level" placeholder="Nivel (A, B, P)">
-    <input type="number" id="mec-price" placeholder="Precio por hora">
-    <button onclick="agregarMecanico()">Agregar Mecánico</button>
+    <!-- FORMULARIO MECÁNICO -->
+    <div class="card">
+        <h2>Agregar Mecánico</h2>
+        <input type="text" id="mec-name" placeholder="Nombre">
+        <input type="text" id="mec-level" placeholder="Nivel (A, B, P)">
+        <input type="number" id="mec-price" placeholder="Precio por hora">
+        <button onclick="agregarMecanico()">Agregar Mecánico</button>
+    </div>
 
-    <!-- ========== FORMULARIO REPUESTO ========== -->
-    <h2>Agregar Repuesto</h2>
-    <input type="text" id="rep-modelo" placeholder="Modelo (ej: nkd 125)">
-    <input type="text" id="rep-nombre" placeholder="Nombre del repuesto">
-    <input type="number" id="rep-precio" placeholder="Precio">
-    <button onclick="agregarRepuesto()">Agregar Repuesto</button>
+    <!-- FORMULARIO REPUESTO -->
+    <div class="card">
+        <h2>Agregar Repuesto</h2>
+        <input type="text" id="rep-modelo" placeholder="Modelo (ej: nkd 125)">
+        <input type="text" id="rep-nombre" placeholder="Nombre del repuesto">
+        <input type="number" id="rep-precio" placeholder="Precio">
+        <button onclick="agregarRepuesto()">Agregar Repuesto</button>
+    </div>
 
-    <!-- ========== FORMULARIO REPARACIÓN ========== -->
-    <h2>Calcular Reparación</h2>
-    <input type="number" id="rep-mecanico" placeholder="Índice del mecánico (0,1,2...)">
-    <input type="number" id="rep-tiempo" placeholder="Tiempo en horas" step="0.5">
-    <button onclick="calcularReparacion()">Calcular</button>
+    <!-- CALCULAR REPARACIÓN -->
+    <div class="card">
+        <h2>Calcular Reparación</h2>
+        
+        <label for="rep-mecanico">Mecánico:</label>
+        <select id="rep-mecanico">
+            <option value="">Selecciona un mecánico...</option>
+        </select>
+        
+        <br><br>
 
-    <hr>
+        <label for="select-modelo-moto">Modelo de la Moto:</label>
+        <select id="select-modelo-moto" onchange="filtrarRepuestosPorModelo()">
+            <option value="">Todos los modelos...</option>
+        </select>
 
-    <!-- Resultados -->
-    <h2>Resultado</h2>
-    <div id="resultado"></div>
+        <br><br>
 
-    <h3>Lista de Mecánicos</h3>
-    <ul id="lista-mecanicos"></ul>
+        <label>Repuestos del modelo seleccionado:</label>
+        <div id="contenedor-repuestos">
+            <p>Selecciona un modelo para ver repuestos compatibles...</p>
+        </div>
 
-    <h3>Lista de Repuestos</h3>
-    <ul id="lista-repuestos"></ul>
+        <br>
+
+        <input type="number" id="rep-tiempo" placeholder="Tiempo en horas" step="0.5" min="0.1">
+        <button onclick="calcularReparacion()">Calcular</button>
+
+        <!-- Resultado -->
+        <h2 style="margin-top: 20px;">Resultado</h2>
+        <div id="resultado">Aún no has realizado un cálculo.</div>
+    </div>
+
+    <!-- INVENTARIO -->
+    <div class="card">
+        <h2>Mecánicos y Repuestos Registrados</h2>
+        <h3>Lista de Mecánicos</h3>
+        <ul id="lista-mecanicos"></ul>
+
+        <h3>Lista de Repuestos</h3>
+        <ul id="lista-repuestos"></ul>
+    </div>
+
+    <!-- HISTORIAL DE PRESUPUESTOS -->
+    <div class="card">
+        <h2>Historial de Presupuestos</h2>
+        <button onclick="cargarHistorial()">Actualizar Historial</button>
+        <ul id="lista-historial"></ul>
+    </div>
 
     <script src="app.js"></script>
 </body>

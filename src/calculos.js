@@ -1,12 +1,12 @@
 // Calcula el costo total de los repuestos (CR)
 calculoRepuestos = (x) => {
-    let iterando = 0;
+    if (!Array.isArray(x)) return 0;
 
-    for (const itera of x) {
-        iterando += itera["precio"];
-    }
-
-    return iterando;   // → CR
+    return x.reduce((acc, itera) => {
+        // Soporta tanto 'price' como 'precio'
+        const precio = Number(itera["price"] || itera["precio"] || 0);
+        return acc + precio;
+    }, 0);
 };
 
 // Calcula el total de la reparación: (VHM × TR) + CR
