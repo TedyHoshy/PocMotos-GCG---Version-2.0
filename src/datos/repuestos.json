@@ -1,0 +1,17 @@
+[
+    {
+        "modelo": "nkd 125",
+        "repuesto": "starter", 
+        "precio": 45000
+    }, 
+    {
+        "modelo": "nkd 125",
+        "repuesto": "empaque", 
+        "precio": 7000
+    }, 
+    {
+        "modelo": "nkd 125",
+        "repuesto": "bobina", 
+        "precio": 123000
+    }
+]
