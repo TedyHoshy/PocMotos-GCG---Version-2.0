@@ -2,24 +2,44 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reparación Moto</title>
+    <title>Taller de Motos</title>
 </head>
 <body>
 
-    <h1>Nombre: <span id="name"></span></h1>
-    <p>Precio hora: <span id="price"></span></p>
-    <p>Tiempo de reparación: <span id="tiempo"></span> horas</p>
-    <p>Costo de repuestos: <span id="cr"></span></p>
-    <h2>Total reparación: <span id="total"></span></h2>
+    <h1>Taller de Motos</h1>
 
-    <h3>Todos los mecánicos:</h3>
+    <!-- ========== FORMULARIO MECÁNICO ========== -->
+    <h2>Agregar Mecánico</h2>
+    <input type="text" id="mec-name" placeholder="Nombre">
+    <input type="text" id="mec-level" placeholder="Nivel (A, B, P)">
+    <input type="number" id="mec-price" placeholder="Precio por hora">
+    <button onclick="agregarMecanico()">Agregar Mecánico</button>
+
+    <!-- ========== FORMULARIO REPUESTO ========== -->
+    <h2>Agregar Repuesto</h2>
+    <input type="text" id="rep-modelo" placeholder="Modelo (ej: nkd 125)">
+    <input type="text" id="rep-nombre" placeholder="Nombre del repuesto">
+    <input type="number" id="rep-precio" placeholder="Precio">
+    <button onclick="agregarRepuesto()">Agregar Repuesto</button>
+
+    <!-- ========== FORMULARIO REPARACIÓN ========== -->
+    <h2>Calcular Reparación</h2>
+    <input type="number" id="rep-mecanico" placeholder="Índice del mecánico (0,1,2...)">
+    <input type="number" id="rep-tiempo" placeholder="Tiempo en horas" step="0.5">
+    <button onclick="calcularReparacion()">Calcular</button>
+
+    <hr>
+
+    <!-- Resultados -->
+    <h2>Resultado</h2>
+    <div id="resultado"></div>
+
+    <h3>Lista de Mecánicos</h3>
     <ul id="lista-mecanicos"></ul>
 
-    <h3>Todos los repuestos:</h3>
+    <h3>Lista de Repuestos</h3>
     <ul id="lista-repuestos"></ul>
 
-    <!-- Aquí se conecta el archivo JavaScript -->
     <script src="app.js"></script>
 </body>
 </html>

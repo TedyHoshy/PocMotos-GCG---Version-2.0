@@ -1,17 +1,17 @@
 [
     {
-        "modelo": "nkd 125",
-        "repuesto": "starter", 
-        "precio": 45000
-    }, 
+        "name": "starter",
+        "brand": "nkd 125",
+        "price": 45000
+    },
     {
-        "modelo": "nkd 125",
-        "repuesto": "empaque", 
-        "precio": 7000
-    }, 
+        "name": "empaque",
+        "brand": "nkd 125",
+        "price": 7000
+    },
     {
-        "modelo": "nkd 125",
-        "repuesto": "bobina", 
-        "precio": 123000
+        "name": "bobina",
+        "brand": "nkd 125",
+        "price": 123000
     }
 ]
