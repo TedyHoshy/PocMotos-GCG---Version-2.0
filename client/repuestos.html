@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Taller de Motos - Repuestos</title>
+    <link rel="icon" type="image/x-icon" href="logo.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header-logo">
+    <img src="logo.ico" alt="Logo" class="logo-ico">
+    <h1>Taller de Motos</h1>
+</div>
+
+    <nav>
+        <a href="index.html">Calcular Reparación</a>
+        <a href="mecanicos.html">Mecánicos</a>
+        <a href="repuestos.html" class="active">Repuestos</a>
+        <a href="historial.html">Historial</a>
+    </nav>
+
+    <div class="card">
+        <h2>Agregar Repuesto</h2>
+        <input type="text" id="rep-modelo" placeholder="Modelo (ej: nkd 125)">
+        <input type="text" id="rep-nombre" placeholder="Nombre del repuesto">
+        <input type="number" id="rep-precio" placeholder="Precio">
+        <button onclick="agregarRepuesto()">Agregar Repuesto</button>
+    </div>
+
+    <div class="card">
+        <h2>Repuestos Registrados</h2>
+        <ul id="lista-repuestos"></ul>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

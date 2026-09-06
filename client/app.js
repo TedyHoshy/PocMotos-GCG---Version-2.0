@@ -1,20 +1,20 @@
 let todosLosRepuestos = []; // Guardará la lista global de repuestos
 
-// ========== CARGAR DESPLEGABLE DE MECÁNICOS ==========
+// ========== CARGAR DESPLEGABLE Y LISTA DE MECÁNICOS ==========
 function cargarSelectMecanicos() {
     fetch("http://localhost:3000/mecanicos")
         .then(res => res.json())
         .then(mecanicos => {
             const select = document.getElementById("rep-mecanico");
-            if (!select) return;
-
-            select.innerHTML = '<option value="">Selecciona un mecánico...</option>';
-            mecanicos.forEach((m, i) => {
-                const option = document.createElement("option");
-                option.value = i;
-                option.textContent = `${m.name} (${m.level}) - $${m.price_hour}/h`;
-                select.appendChild(option);
-            });
+            if (select) {
+                select.innerHTML = '<option value="">Selecciona un mecánico...</option>';
+                mecanicos.forEach((m, i) => {
+                    const option = document.createElement("option");
+                    option.value = i;
+                    option.textContent = `${m.name} (${m.level}) - $${m.price_hour}/h`;
+                    select.appendChild(option);
+                });
+            }
             
             mostrarMecanicos(mecanicos);
         })
@@ -28,10 +28,9 @@ function cargarSelectRepuestos() {
         .then(repuestos => {
             todosLosRepuestos = repuestos;
             
-            // Extraer modelos únicos (ej: "nkd 125")
             const modelosUnicos = [...new Set(repuestos.map(r => (r.brand || r.modelo || "Generico").toLowerCase()))];
-            
             const selectModelo = document.getElementById("select-modelo-moto");
+            
             if (selectModelo) {
                 selectModelo.innerHTML = '<option value="">Todos los modelos...</option>';
                 modelosUnicos.forEach(modelo => {
@@ -56,7 +55,6 @@ function filtrarRepuestosPorModelo() {
     const modeloSeleccionado = selectModelo ? selectModelo.value.toLowerCase() : "";
     contenedor.innerHTML = "";
 
-    // Filtrar la lista global por la marca/modelo elegido
     const repuestosFiltrados = todosLosRepuestos.filter((r, index) => {
         const modeloRepuesto = (r.brand || r.modelo || "").toLowerCase();
         r.originalIndex = index;
@@ -104,10 +102,19 @@ function cargarHistorial() {
 
 // ========== AGREGAR MECÁNICO ==========
 function agregarMecanico() {
+    const nameInput = document.getElementById("mec-name");
+    const levelInput = document.getElementById("mec-level");
+    const priceInput = document.getElementById("mec-price");
+
+    if (!nameInput.value || !levelInput.value || !priceInput.value) {
+        alert("Por favor completa todos los campos del mecánico.");
+        return;
+    }
+
     const datos = {
-        name: document.getElementById("mec-name").value,
-        level: document.getElementById("mec-level").value,
-        price_hour: document.getElementById("mec-price").value
+        name: nameInput.value,
+        level: levelInput.value,
+        price_hour: Number(priceInput.value)
     };
 
     fetch("http://localhost:3000/mecanicos", {
@@ -117,22 +124,31 @@ function agregarMecanico() {
     })
     .then(res => res.json())
     .then(res => {
-        alert(res.ms);
-        document.getElementById("mec-name").value = "";
-        document.getElementById("mec-level").value = "";
-        document.getElementById("mec-price").value = "";
+        alert(res.ms || "Mecánico guardado con éxito");
+        nameInput.value = "";
+        levelInput.value = "";
+        priceInput.value = "";
         
         cargarSelectMecanicos();
     })
-    .catch(err => console.error(err));
+    .catch(err => console.error("Error al agregar mecánico:", err));
 }
 
 // ========== AGREGAR REPUESTO ==========
 function agregarRepuesto() {
+    const modeloInput = document.getElementById("rep-modelo");
+    const nombreInput = document.getElementById("rep-nombre");
+    const precioInput = document.getElementById("rep-precio");
+
+    if (!modeloInput.value || !nombreInput.value || !precioInput.value) {
+        alert("Por favor completa todos los campos del repuesto.");
+        return;
+    }
+
     const datos = {
-        name: document.getElementById("rep-nombre").value,
-        brand: document.getElementById("rep-modelo").value,
-        price: Number(document.getElementById("rep-precio").value)
+        name: nombreInput.value,
+        brand: modeloInput.value,
+        price: Number(precioInput.value)
     };
 
     fetch("http://localhost:3000/repuestos", {
@@ -140,15 +156,12 @@ function agregarRepuesto() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(datos)
     })
+    .then(res => res.json())
     .then(res => {
-        if (!res.ok) throw new Error("Error en la respuesta del servidor");
-        return res.json();
-    })
-    .then(res => {
-        alert(res.ms);
-        document.getElementById("rep-nombre").value = "";
-        document.getElementById("rep-modelo").value = "";
-        document.getElementById("rep-precio").value = "";
+        alert(res.ms || "Repuesto guardado con éxito");
+        nombreInput.value = "";
+        modeloInput.value = "";
+        precioInput.value = "";
 
         cargarSelectRepuestos();
     })
@@ -160,12 +173,11 @@ function calcularReparacion() {
     const selectMecanico = document.getElementById("rep-mecanico");
     const tiempoInput = document.getElementById("rep-tiempo");
 
-    // Capturar checkboxes de repuestos seleccionados
     const checkboxes = document.querySelectorAll(".chk-repuesto:checked");
     const repuestosIndexes = Array.from(checkboxes).map(chk => Number(chk.value));
 
-    if (!selectMecanico.value || !tiempoInput.value) {
-        alert("Por favor selecciona un mecánico y especifica el tiempo.");
+    if (!selectMecanico || !selectMecanico.value || !tiempoInput || !tiempoInput.value) {
+        alert("Por favor selecciona un mecánico y especifica el tiempo en horas.");
         return;
     }
 
@@ -183,14 +195,17 @@ function calcularReparacion() {
     .then(res => res.json())
     .then(res => {
         const calculo = res.data || res;
+        const resultadoDiv = document.getElementById("resultado");
 
-        document.getElementById("resultado").innerHTML = `
-            <p><strong>Mecánico:</strong> ${calculo.mecanico.name}</p>
-            <p><strong>Piezas seleccionadas:</strong> ${repuestosIndexes.length}</p>
-            <p><strong>Tiempo:</strong> ${calculo.tiempo_reparacion} horas</p>
-            <p><strong>Costo repuestos:</strong> $${calculo.costo_repuestos}</p>
-            <p><strong>Total:</strong> $${calculo.res}</p>
-        `;
+        if (resultadoDiv) {
+            resultadoDiv.innerHTML = `
+                <p><strong>Mecánico:</strong> ${calculo.mecanico.name}</p>
+                <p><strong>Piezas seleccionadas:</strong> ${repuestosIndexes.length}</p>
+                <p><strong>Tiempo:</strong> ${calculo.tiempo_reparacion} horas</p>
+                <p><strong>Costo repuestos:</strong> $${calculo.costo_repuestos}</p>
+                <p style="font-size: 1.1rem; margin-top: 5px; color: #1e3a8a;"><strong>Total:</strong> $${calculo.res}</p>
+            `;
+        }
 
         cargarHistorial();
     })
@@ -221,7 +236,7 @@ function mostrarRepuestos(lista) {
         const precio = r.price || r.precio || 0;
 
         const li = document.createElement("li");
-        li.textContent = `${nombre} (${marca}) - $${precio}`;
+        li.textContent = `${nombre} (${marca.toUpperCase()}) - $${precio}`;
         ul.appendChild(li);
     });
 }

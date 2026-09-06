@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Taller de Motos - Historial</title>
+    <link rel="icon" type="image/x-icon" href="logo.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header-logo">
+    <img src="logo.ico" alt="Logo" class="logo-ico">
+    <h1>Taller de Motos</h1>
+</div>
+
+    <nav>
+        <a href="index.html">Calcular Reparación</a>
+        <a href="mecanicos.html">Mecánicos</a>
+        <a href="repuestos.html">Repuestos</a>
+        <a href="historial.html" class="active">Historial</a>
+    </nav>
+
+    <div class="card">
+        <h2>Historial de Presupuestos</h2>
+        <button onclick="cargarHistorial()">Actualizar Historial</button>
+        <ul id="lista-historial"></ul>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
