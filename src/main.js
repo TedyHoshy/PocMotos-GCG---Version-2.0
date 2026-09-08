@@ -1,10 +1,9 @@
 // 1. Imports
 const express = require("express");
 const cors = require("cors");
-const dotenv = require("dotenv").config();
+require("dotenv").config();
 const path = require("path");
 const fs = require("fs");
-const OpenAI = require("openai");
 
 // 2. Datos
 const mecanicos = require("./datos/data.json");
@@ -12,16 +11,11 @@ const repuestos = require("./datos/repuestos.json");
 
 // 3. Rutas modularizadas
 const reparacionRoutes = require("./routes/reparacion.routes");
-const openaiRoutes = require("./routes/openai.routes");   // ← AGREGA ESTA LÍNEA
+const openaiRoutes = require("./routes/openai.routes");
 
-// 4. Crear la app (¡esto tiene que ir antes de usar app!)
+// 4. Crear la app
 const app = express();
 const PORT = process.env.PORT || 3000;
-
-// 5. OpenAI
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
 
 // 6. Middlewares
 app.use(cors());
@@ -31,14 +25,14 @@ app.use(express.static(path.join(__dirname, "../client")));
 // 7. Registrar el router de reparaciones
 app.use(reparacionRoutes);
 
-// 8. Ruta de OpenAI
+// 8. Ruta de OpenAI / OpenRouter
 app.use("/api/openai", openaiRoutes);
 
 // 9. Rutas GET
 app.get("/mecanicos", (req, res) => res.json(mecanicos));
 app.get("/repuestos", (req, res) => res.json(repuestos));
 
-// ========== AQUÍ van los POST (después de crear app) ==========
+// ========== POST ==========
 app.post("/mecanicos", (req, res) => {
     try {
         const { name, level, price_hour } = req.body;

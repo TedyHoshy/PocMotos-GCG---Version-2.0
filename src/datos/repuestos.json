@@ -38,5 +38,10 @@
     "name": "bobina",
     "brand": "HERO XPULSE 200",
     "price": 1234667889
+  },
+  {
+    "name": "empaque",
+    "brand": "HERO XPULSE 200",
+    "price": 256789
   }
 ]
