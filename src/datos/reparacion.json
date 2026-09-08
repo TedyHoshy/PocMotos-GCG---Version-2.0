@@ -34,5 +34,17 @@
         "costo_repuestos": 175000,
         "res": 480000,
         "fecha": "2026-09-06T19:12:54.826Z"
+    },
+    {
+        "id": 1788831551372,
+        "mecanico": {
+            "name": "MArlon",
+            "level": "A",
+            "price_hour": 38
+        },
+        "tiempo_reparacion": 10,
+        "costo_repuestos": 175000,
+        "res": 175380,
+        "fecha": "2026-09-08T01:39:11.372Z"
     }
 ]

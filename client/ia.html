@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Taller de Motos - Asistente IA</title>
+    <link rel="icon" type="image/x-icon" href="logo.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="header-logo">
+        <img src="logo.ico" alt="Logo" class="logo-ico">
+        <h1>Taller de Motos</h1>
+    </div>
+
+    <nav>
+        <a href="index.html">Calcular Reparación</a>
+        <a href="mecanicos.html">Mecánicos</a>
+        <a href="repuestos.html">Repuestos</a>
+        <a href="historial.html">Historial</a>
+        <a href="ia.html" class="active">Asistente IA</a>
+    </nav>
+
+    <div class="card">
+        <h2>🤖 Asistente de Diagnóstico y Repuestos</h2>
+        
+        <div id="ai-chat-box" style="height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 12px; margin-bottom: 15px; background: #fafafa; border-radius: 6px;">
+            <p><i>¡Hola! Soy tu asistente técnico. Pregúntame sobre repuestos, mantenimiento o diagnósticos de fallas.</i></p>
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+            <input type="text" id="ai-prompt-input" placeholder="Ej: ¿Cada cuánto se cambia el aceite de una AKT NKD 125?" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
+            <button onclick="consultarIA()" id="ai-send-btn" style="padding: 10px 20px;">Consultar</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Permitir enviar con la tecla Enter
+        document.getElementById("ai-prompt-input")?.addEventListener("keypress", function(e) {
+            if (e.key === "Enter") consultarIA();
+        });
+    </script>
+</body>
+</html>

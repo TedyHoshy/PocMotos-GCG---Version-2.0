@@ -1,17 +1,32 @@
 [
-    {
-        "name": "starter",
-        "brand": "nkd 125",
-        "price": 45000
-    },
-    {
-        "name": "empaque",
-        "brand": "nkd 125",
-        "price": 7000
-    },
-    {
-        "name": "bobina",
-        "brand": "nkd 125",
-        "price": 123000
-    }
+  {
+    "name": "starter",
+    "brand": "nkd 125",
+    "price": 45000
+  },
+  {
+    "name": "empaque",
+    "brand": "nkd 125",
+    "price": 7000
+  },
+  {
+    "name": "bobina",
+    "brand": "nkd 125",
+    "price": 123000
+  },
+  {
+    "name": "starter",
+    "brand": "Yamaha Aerox 155",
+    "price": 10000000000
+  },
+  {
+    "name": "empaque",
+    "brand": "YAMAHA AEROX 155",
+    "price": 29999
+  },
+  {
+    "name": "bobina",
+    "brand": "YAMAHA AEROX 155",
+    "price": 1000000000
+  }
 ]

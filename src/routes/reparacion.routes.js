@@ -19,13 +19,14 @@ if (fs.existsSync(rutaHistorial)) {
     }
 }
 
-// Esquema de validación Zod
+// Esquema de validación Zod (ahora incluye los índices de repuestos)
 const reparacionSchema = z.object({
     mecanicoIndex: z.number({ invalid_type_error: "El índice del mecánico debe ser un número" })
                     .int("El índice debe ser entero")
                     .nonnegative("El índice no puede ser negativo"),
     tiempo: z.number({ invalid_type_error: "El tiempo debe ser un número" })
-             .positive("El tiempo de reparación debe ser mayor a 0")
+             .positive("El tiempo de reparación debe ser mayor a 0"),
+    repuestosIndexes: z.array(z.number().int().nonnegative()).optional().default([])
 });
 
 const guardarHistorial = (data) => {
@@ -53,15 +54,20 @@ router.post("/reparacion", (req, res) => {
             });
         }
 
-        const { mecanicoIndex, tiempo } = validacion.data;
+        const { mecanicoIndex, tiempo, repuestosIndexes } = validacion.data;
         const mecanicoEncontrado = mecanicos[mecanicoIndex];
 
         if (!mecanicoEncontrado) {
             return res.status(404).json({ error: "El índice de mecánico no existe" });
         }
 
+        // Filtrar solo los repuestos seleccionados
+        const repuestosSeleccionados = repuestosIndexes
+            .map(i => repuestos[i])
+            .filter(Boolean); // elimina índices inválidos
+
         const vhm = Number(mecanicoEncontrado.price_hour);
-        const cr = calculoRepuestos(repuestos);
+        const cr = calculoRepuestos(repuestosSeleccionados); // ← ahora solo los seleccionados
         const total = tarifaTotal(vhm, tiempo, cr);
 
         const calculo = {
@@ -69,6 +75,7 @@ router.post("/reparacion", (req, res) => {
             mecanico: mecanicoEncontrado,
             tiempo_reparacion: tiempo,
             costo_repuestos: cr,
+            repuestos_usados: repuestosSeleccionados, // opcional, para el historial
             res: total,
             fecha: new Date().toISOString()
         };
@@ -78,9 +85,7 @@ router.post("/reparacion", (req, res) => {
 
         return res.status(201).json({
             ms: "Cálculo realizado y guardado exitosamente",
-            data: calculo,
-            todos_los_mecanicos: mecanicos,
-            todos_los_repuestos: repuestos
+            data: calculo
         });
 
     } catch (error) {
