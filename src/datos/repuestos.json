@@ -28,5 +28,15 @@
     "name": "bobina",
     "brand": "YAMAHA AEROX 155",
     "price": 1000000000
+  },
+  {
+    "name": "starter",
+    "brand": "Hero Xpulse 200",
+    "price": 2000000
+  },
+  {
+    "name": "bobina",
+    "brand": "HERO XPULSE 200",
+    "price": 1234667889
   }
 ]

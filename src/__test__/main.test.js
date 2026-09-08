@@ -6,8 +6,11 @@ const {
     tarifaTotal
 } = require("../calculos.js");
 
-const repuestos = require("../datos/repuestos.json");
-const mecanicos = require("../datos/data.json");
+// Datos de prueba simulados (Mocks) para garantizar los valores esperados
+const repuestosTest = [
+    { precio: 100000 },
+    { precio: 75000 }
+];
 
 describe("Health", () => {
 
@@ -21,16 +24,17 @@ describe("Health", () => {
     });
 
     it("Prueba unitaria Calculo Repuestos", async () => {
-        const calculo = calculoRepuestos(repuestos);
+        // Le pasamos la lista simulada que suma exactamente 175.000
+        const calculo = calculoRepuestos(repuestosTest);
 
         expect(calculo).toEqual(175000);
     });
 
     it("Prueba unitaria Tarifa Total", async () => {
-        const cr = calculoRepuestos(repuestos);
+        const cr = calculoRepuestos(repuestosTest); // 175000
+        const vhm = 75000; // Valor por hora del mecánico simulado (75000 * 2.5 = 187500)
 
-        const vhm = mecanicos[1]["price_hour"];
-
+        // 187500 (mano de obra) + 175000 (repuestos) = 362500
         const final = tarifaTotal(vhm, 2.5, cr);
 
         expect(final).toEqual(362500);

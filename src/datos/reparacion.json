@@ -1,41 +1,5 @@
 [
     {
-        "id": 1788721215898,
-        "mecanico": {
-            "name": "Yusef",
-            "level": "A",
-            "price_hour": 100000
-        },
-        "tiempo_reparacion": 3.1,
-        "costo_repuestos": 175000,
-        "res": 485000,
-        "fecha": "2026-09-06T19:00:15.898Z"
-    },
-    {
-        "id": 1788721813016,
-        "mecanico": {
-            "name": "EverNever",
-            "level": "B",
-            "price_hour": 50000
-        },
-        "tiempo_reparacion": 5.1,
-        "costo_repuestos": 175000,
-        "res": 430000,
-        "fecha": "2026-09-06T19:10:13.016Z"
-    },
-    {
-        "id": 1788721974826,
-        "mecanico": {
-            "name": "EverNever",
-            "level": "B",
-            "price_hour": 50000
-        },
-        "tiempo_reparacion": 6.1,
-        "costo_repuestos": 175000,
-        "res": 480000,
-        "fecha": "2026-09-06T19:12:54.826Z"
-    },
-    {
         "id": 1788831551372,
         "mecanico": {
             "name": "MArlon",

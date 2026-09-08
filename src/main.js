@@ -12,6 +12,7 @@ const repuestos = require("./datos/repuestos.json");
 
 // 3. Rutas modularizadas
 const reparacionRoutes = require("./routes/reparacion.routes");
+const openaiRoutes = require("./routes/openai.routes");   // ← AGREGA ESTA LÍNEA
 
 // 4. Crear la app (¡esto tiene que ir antes de usar app!)
 const app = express();
