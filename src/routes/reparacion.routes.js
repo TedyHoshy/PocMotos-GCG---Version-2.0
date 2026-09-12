@@ -91,7 +91,7 @@ router.post("/reparacion", (req, res) => {
     } catch (error) {
         console.error("Error en POST /reparacion:", error);
         return res.status(500).json({ error: "Error interno del servidor al procesar la reparación" });
-    }
+    };
 });
 
 module.exports = router;
