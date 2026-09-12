@@ -10,7 +10,7 @@ function escapeHtml(text) {
 
 // ========== CARGAR DESPLEGABLE Y LISTA DE MECÁNICOS ==========
 function cargarSelectMecanicos() {
-    fetch("/mecanicos")
+    fetch("http://localhost:3000/mecanicos")
         .then(async res => {
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             return res.json();
@@ -37,7 +37,7 @@ function cargarSelectMecanicos() {
 
 // ========== CARGAR Y FILTRAR REPUESTOS POR MODELO ==========
 function cargarSelectRepuestos() {
-    fetch("/repuestos")
+    fetch("http://localhost:3000/repuestos")
         .then(async res => {
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             return res.json();
@@ -77,6 +77,7 @@ function filtrarRepuestosPorModelo() {
     const modeloSeleccionado = selectModelo ? selectModelo.value.toLowerCase() : "";
     contenedor.innerHTML = "";
 
+    // Creamos copias con el índice original (NO mutamos el array global)
     const repuestosFiltrados = todosLosRepuestos
         .map((r, index) => ({ ...r, originalIndex: index }))
         .filter(r => {
@@ -113,7 +114,7 @@ function filtrarRepuestosPorModelo() {
 
 // ========== HISTORIAL DE PRESUPUESTOS ==========
 function cargarHistorial() {
-    fetch("/historial")
+    fetch("http://localhost:3000/historial")
         .then(async res => {
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             return res.json();
@@ -163,7 +164,7 @@ function agregarMecanico() {
         price_hour: precio
     };
 
-    fetch("/mecanicos", {
+    fetch("http://localhost:3000/mecanicos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(datos)
@@ -210,7 +211,7 @@ function agregarRepuesto() {
         price: precio
     };
 
-    fetch("/repuestos", {
+    fetch("http://localhost:3000/repuestos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(datos)
@@ -257,7 +258,7 @@ function calcularReparacion() {
         tiempo: tiempo
     };
 
-    fetch("/reparacion", {
+    fetch("http://localhost:3000/reparacion", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(datos)
@@ -271,7 +272,7 @@ function calcularReparacion() {
         const resultadoDiv = document.getElementById("resultado");
 
         if (resultadoDiv) {
-            resultadoDiv.innerHTML = "";
+            resultadoDiv.innerHTML = ""; // limpiamos de forma segura
 
             const p1 = document.createElement("p");
             p1.innerHTML = `<strong>Mecánico:</strong> ${escapeHtml(calculo.mecanico?.name || "Desconocido")}`;
@@ -347,6 +348,7 @@ async function consultarIA() {
     const mensaje = input.value.trim();
     if (!mensaje) return;
 
+    // 1. Mensaje del usuario (seguro)
     const userDiv = document.createElement("div");
     userDiv.style.cssText = "text-align: right; margin-bottom: 10px;";
     const userSpan = document.createElement("span");
@@ -358,6 +360,7 @@ async function consultarIA() {
     input.value = "";
     btn.disabled = true;
 
+    // 2. Indicador de carga
     const loaderId = "loading-" + Date.now();
     const loaderDiv = document.createElement("div");
     loaderDiv.id = loaderId;
@@ -370,7 +373,7 @@ async function consultarIA() {
     chatBox.scrollTop = chatBox.scrollHeight;
 
     try {
-        const response = await fetch("/api/openai/chat", {
+        const response = await fetch("http://localhost:3000/api/openai/chat", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ prompt: mensaje })
@@ -393,6 +396,7 @@ async function consultarIA() {
             botContent.appendChild(strong);
             botContent.appendChild(document.createElement("br"));
 
+            // Escapamos y convertimos saltos de línea de forma segura
             const respuestaSegura = escapeHtml(data.respuesta).replace(/\n/g, "<br>");
             const temp = document.createElement("div");
             temp.innerHTML = respuestaSegura;

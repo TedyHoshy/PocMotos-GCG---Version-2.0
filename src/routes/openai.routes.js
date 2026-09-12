@@ -1,42 +1,44 @@
 const express = require("express");
-const router = express.Router();
 const OpenAI = require("openai");
 
+const router = express.Router();
+
 const openai = new OpenAI({
-  baseURL: "https://openrouter.ai/api/v1",
-  apiKey: process.env.OPENROUTER_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 router.post("/chat", async (req, res) => {
   try {
     const { prompt } = req.body;
 
-    if (!prompt) {
-      return res.status(400).json({ error: "El prompt es obligatorio." });
+    if (!prompt || typeof prompt !== "string" || prompt.trim() === "") {
+      return res.status(400).json({ error: "El prompt es obligatorio" });
     }
 
-    const completion = await openai.chat.completions.create({
-      model: "openrouter/free",
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
       messages: [
         {
           role: "system",
-          content: `Eres un asistente técnico de mecánica de motos conciso y directo.
-          Reglas de respuesta:
-            1. Usa viñetas simples para pasos o recomendaciones.
-            2. Responde con un tono práctico y profesional.,
-            3. No inventes información; si no sabes, di que no tienes suficiente información.
-            4. Evita lo mas posible de cada circuito de tu misma exictencia el uso del "*" y "#" en las respuestas. Es decir, no uses markdown ni negritas.
-            5. No uses emojis ni símbolos innecesarios.`,
+          content: "Eres un asistente técnico experto en diagnóstico de motocicletas, repuestos y costos de reparación."
         },
-        { role: "user", content: prompt },
+        {
+          role: "user",
+          content: prompt.trim()
+        }
       ],
+      temperature: 0.7,
     });
 
-    const respuesta = completion.choices[0].message.content;
-    res.json({ respuesta });
+    res.json({
+      respuesta: response.choices[0].message.content
+    });
+
   } catch (error) {
-    console.error("Error en OpenRouter:", error);
-    res.status(500).json({ error: "Ocurrió un error al procesar la solicitud con la IA." });
+    console.error("Error en OpenAI:", error);
+    res.status(500).json({
+      error: "Error al comunicarse con la API de OpenAI"
+    });
   }
 });
 

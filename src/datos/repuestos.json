@@ -42,6 +42,11 @@
   {
     "name": "empaque",
     "brand": "HERO XPULSE 200",
-    "price": 256789
+    "price": 10000
+  },
+  {
+    "name": "starter",
+    "brand": "Raider 125 FI",
+    "price": 10000
   }
 ]

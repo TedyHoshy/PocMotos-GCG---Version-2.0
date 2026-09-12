@@ -12,27 +12,46 @@
         "fecha": "2026-09-08T01:39:11.372Z"
     },
     {
-        "id": 1788835173389,
+        "id": 1789241297340,
         "mecanico": {
             "name": "Yusef",
             "level": "A",
             "price_hour": 100000
         },
-        "tiempo_reparacion": 29,
-        "costo_repuestos": 1236667889,
+        "tiempo_reparacion": 7.6,
+        "costo_repuestos": 2000000,
         "repuestos_usados": [
             {
                 "name": "starter",
                 "brand": "Hero Xpulse 200",
                 "price": 2000000
+            }
+        ],
+        "res": 2760000,
+        "fecha": "2026-09-12T19:28:17.340Z"
+    },
+    {
+        "id": 1789241713451,
+        "mecanico": {
+            "name": "Brenda",
+            "level": "P",
+            "price_hour": 100
+        },
+        "tiempo_reparacion": 1.1,
+        "costo_repuestos": 168000,
+        "repuestos_usados": [
+            {
+                "name": "starter",
+                "brand": "nkd 125",
+                "price": 45000
             },
             {
                 "name": "bobina",
-                "brand": "HERO XPULSE 200",
-                "price": 1234667889
+                "brand": "nkd 125",
+                "price": 123000
             }
         ],
-        "res": 1239567889,
-        "fecha": "2026-09-08T02:39:33.389Z"
+        "res": 168110,
+        "fecha": "2026-09-12T19:35:13.451Z"
     }
 ]

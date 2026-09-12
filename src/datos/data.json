@@ -23,5 +23,15 @@
     "name": "Jose",
     "level": "B",
     "price_hour": 11
+  },
+  {
+    "name": "Brenda",
+    "level": "P",
+    "price_hour": 100
+  },
+  {
+    "name": "Jose Luis",
+    "level": "B",
+    "price_hour": 40
   }
 ]
