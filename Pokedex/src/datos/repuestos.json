@@ -1,0 +1,52 @@
+[
+  {
+    "name": "starter",
+    "brand": "nkd 125",
+    "price": 45000
+  },
+  {
+    "name": "empaque",
+    "brand": "nkd 125",
+    "price": 7000
+  },
+  {
+    "name": "bobina",
+    "brand": "nkd 125",
+    "price": 123000
+  },
+  {
+    "name": "starter",
+    "brand": "Yamaha Aerox 155",
+    "price": 10000000000
+  },
+  {
+    "name": "empaque",
+    "brand": "YAMAHA AEROX 155",
+    "price": 29999
+  },
+  {
+    "name": "bobina",
+    "brand": "YAMAHA AEROX 155",
+    "price": 1000000000
+  },
+  {
+    "name": "starter",
+    "brand": "Hero Xpulse 200",
+    "price": 2000000
+  },
+  {
+    "name": "bobina",
+    "brand": "HERO XPULSE 200",
+    "price": 1234667889
+  },
+  {
+    "name": "empaque",
+    "brand": "HERO XPULSE 200",
+    "price": 10000
+  },
+  {
+    "name": "starter",
+    "brand": "Raider 125 FI",
+    "price": 10000
+  }
+]

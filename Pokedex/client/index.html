@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Taller de Motos</title>
+    <link rel="icon" type="image/x-icon" href="logo.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header-logo">
+    <img src="logo.ico" alt="Logo" class="logo-ico">
+    <h1>Taller de Motos</h1>
+</div>
+
+    <nav>
+        <a href="index.html" class="active">Calcular Reparación</a>
+        <a href="mecanicos.html">Mecánicos</a>
+        <a href="repuestos.html">Repuestos</a>
+        <a href="historial.html">Historial</a>
+        <a href="ia.html">Asistente IA</a>
+    </nav>
+
+    <div class="card">
+        <h2>Calcular Reparación</h2>
+        
+        <label for="rep-mecanico">Mecánico:</label>
+        <select id="rep-mecanico">
+            <option value="">Selecciona un mecánico...</option>
+        </select>
+        <br><br>
+
+        <label for="select-modelo-moto">Modelo de la Moto:</label>
+        <select id="select-modelo-moto" onchange="filtrarRepuestosPorModelo()">
+            <option value="">Todos los modelos...</option>
+        </select>
+        <br><br>
+
+        <label>Repuestos del modelo seleccionado:</label>
+        <div id="contenedor-repuestos">
+            <p>Selecciona un modelo para ver repuestos compatibles...</p>
+        </div>
+
+        <input type="number" id="rep-tiempo" placeholder="Tiempo en horas" step="0.5" min="0.1">
+        <button onclick="calcularReparacion()">Calcular</button>
+
+        <h2 style="margin-top: 25px;">Resultado</h2>
+        <div id="resultado">Aún no has realizado un cálculo.</div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/mecanicos.js"></script>
+    <script src="js/repuestos.js"></script>
+    <script src="js/historial.js"></script>
+    <script src="js/reparacion.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

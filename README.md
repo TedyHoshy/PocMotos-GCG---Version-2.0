@@ -1,1 +1,0 @@
-PocMotos Version 2.6 es la actual version funcional de la ya estinta PocMotos Version 2.4 y 2.5. Estas versiones anteriores tenian unos grandes errores queh hacian el codigo no funcional. Disfruten esta version funcional, todavia le falta para reparar.
